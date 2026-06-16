@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Valle Azul | Maquetación Portal B2B</title>
+  <meta name="description" content="Maquetación visual del portal B2B para Valle Azul: clientes, precios personalizados, variantes, revisión de pedidos y GTI." />
+  <style>
+    :root{
+      --green-950:#092315;
+      --green-900:#10361f;
+      --green-800:#174b2a;
+      --green-700:#20743f;
+      --green-600:#2d9254;
+      --green-500:#45a866;
+      --leaf:#b9dd55;
+      --leaf-2:#d8f0a2;
+      --cream:#f6f8ed;
+      --cream-2:#eef4df;
+      --paper:#ffffff;
+      --ink:#142019;
+      --soft:#68766c;
+      --line:#dfe9d5;
+      --amber:#f7b544;
+      --red:#d94f45;
+      --blue:#2f6fb2;
+      --shadow:0 24px 75px rgba(16,54,31,.16);
+      --shadow-soft:0 12px 34px rgba(16,54,31,.10);
+      --radius:26px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:linear-gradient(135deg,#f8faf0 0%,#edf5de 45%,#ffffff 100%);color:var(--ink)}
+    a{color:inherit;text-decoration:none}
+    button,input,select,textarea{font:inherit}
+    .app{min-height:100vh;display:grid;grid-template-columns:292px 1fr}
+    .side{position:sticky;top:0;height:100vh;z-index:20;background:radial-gradient(circle at 20% 8%,rgba(185,221,85,.26),transparent 25%),linear-gradient(180deg,var(--green-950),var(--green-900));color:white;padding:26px 20px;display:flex;flex-direction:column;gap:22px;box-shadow:16px 0 50px rgba(9,35,21,.20)}
+    .brand{display:flex;gap:14px;align-items:center;padding:5px 6px 14px;border-bottom:1px solid rgba(255,255,255,.12)}
+    .brand img{width:64px;height:64px;object-fit:contain;background:rgba(255,255,255,.96);border-radius:20px;padding:8px;box-shadow:0 16px 35px rgba(0,0,0,.14)}
+    .brand h1{font-size:18px;line-height:1.04;margin:0;letter-spacing:-.04em}
+    .brand span{display:block;color:#cfe6c9;font-weight:600;font-size:12px;margin-top:5px}
+    .nav{display:grid;gap:8px}
+    .nav button{border:0;background:transparent;color:#dcebd7;border-radius:16px;padding:13px 13px;text-align:left;cursor:pointer;font-weight:850;display:flex;gap:10px;align-items:center;transition:.18s ease}
+    .nav button:hover,.nav button.active{background:rgba(255,255,255,.13);color:white;transform:translateX(2px)}
+    .side-card{margin-top:auto;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);border-radius:22px;padding:16px}
+    .side-card b{display:block;margin-bottom:6px}.side-card small{display:block;color:#cee3c7;line-height:1.5;font-weight:600}
+    main{padding:26px;min-width:0}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+    .pill{display:inline-flex;gap:8px;align-items:center;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.78);border:1px solid var(--line);box-shadow:var(--shadow-soft);font-size:13px;font-weight:900;color:var(--green-800)}
+    .actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.btn{border:0;border-radius:16px;padding:12px 16px;font-weight:950;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:9px;transition:.18s ease}.btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:var(--green-800);color:white;box-shadow:0 15px 35px rgba(23,75,42,.22)}.btn-primary:hover{background:var(--green-700)}.btn-lime{background:var(--leaf);color:var(--green-950)}.btn-soft{background:white;color:var(--green-800);border:1px solid var(--line)}.btn-danger{background:#fff0ee;color:#a93b34;border:1px solid #ffd0cc}.btn-blue{background:#eef6ff;color:#1e5f9d;border:1px solid #cfe4fa}.btn-block{width:100%}
+    .screen{display:none;animation:fade .22s ease}.screen.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+    .hero{display:grid;grid-template-columns:1.24fr .76fr;gap:20px;align-items:stretch}.hero-card{position:relative;overflow:hidden;border-radius:var(--radius);padding:38px;background:radial-gradient(circle at 13% 15%,rgba(185,221,85,.42),transparent 30%),linear-gradient(135deg,#fff 0%,#eff6de 100%);border:1px solid rgba(32,116,63,.14);box-shadow:var(--shadow)}.hero-card:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;right:-125px;top:-95px;background:rgba(45,146,84,.11)}
+    .hero-brand{display:flex;align-items:center;gap:14px;margin-bottom:16px;position:relative;z-index:1}.hero-brand img{width:86px;height:86px;object-fit:contain;background:white;border-radius:24px;padding:10px;border:1px solid var(--line);box-shadow:var(--shadow-soft)}
+    .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:950;color:var(--green-700);margin-bottom:7px}.hero h2{font-size:48px;line-height:.98;letter-spacing:-.065em;margin:0 0 18px;color:var(--green-950);max-width:820px;position:relative;z-index:1}.hero p{font-size:17px;line-height:1.65;color:#465148;margin:0 0 25px;max-width:820px;position:relative;z-index:1}.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:26px;position:relative;z-index:1}.stat{background:rgba(255,255,255,.84);border:1px solid var(--line);border-radius:20px;padding:15px}.stat b{display:block;font-size:22px;color:var(--green-950);letter-spacing:-.05em}.stat span{font-size:12px;color:var(--soft);font-weight:750;line-height:1.35}
+    .quote-card{background:var(--green-950);color:white;border-radius:var(--radius);padding:29px;box-shadow:var(--shadow);position:relative;overflow:hidden}.quote-card:after{content:"";position:absolute;right:-65px;bottom:-65px;width:190px;height:190px;border-radius:50%;background:rgba(185,221,85,.18)}.quote-card h3{margin:0 0 8px;font-size:24px;letter-spacing:-.045em}.quote-card p{margin:0 0 14px;color:#d8ead2;line-height:1.55}.price{font-size:46px;font-weight:1000;letter-spacing:-.07em;margin:15px 0 0}.price small{font-size:15px;color:#d3e4ce;letter-spacing:0}.quote-list{display:grid;gap:10px;margin:18px 0}.qrow{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:#ecf8e9}.qrow b{color:var(--leaf)}.fine{font-size:12px;color:#ccdfc7;line-height:1.45}.section-title{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;margin:28px 0 15px}.section-title h2{margin:0;font-size:30px;letter-spacing:-.055em;color:var(--green-950)}.section-title p{margin:5px 0 0;color:var(--soft);line-height:1.45}.grid{display:grid;gap:16px}.grid-2{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:repeat(3,1fr)}.grid-4{grid-template-columns:repeat(4,1fr)}.card{background:rgba(255,255,255,.86);border:1px solid var(--line);border-radius:23px;padding:20px;box-shadow:var(--shadow-soft)}.card h3{margin:0 0 8px;color:var(--green-950);letter-spacing:-.04em}.card p{margin:0;color:var(--soft);line-height:1.55;font-size:14px}.icon{width:46px;height:46px;border-radius:16px;background:#eef8dc;display:grid;place-items:center;font-size:23px;margin-bottom:14px}.tag{font-size:12px;border-radius:999px;padding:7px 10px;background:#ecf6df;color:var(--green-800);font-weight:950;display:inline-flex;gap:6px;align-items:center}.tag.amber{background:#fff6dc;color:#805300}.tag.red{background:#fff0ee;color:#9e342e}.tag.blue{background:#edf6ff;color:#235f99}
+    .mock-frame{background:#0d2b19;border-radius:30px;padding:13px;border:1px solid rgba(9,35,21,.20);box-shadow:var(--shadow)}.mock-window{background:#f8fbf2;border-radius:22px;overflow:hidden}.mock-header{height:57px;background:white;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 18px;gap:12px}.dots{display:flex;gap:7px}.dot{width:10px;height:10px;border-radius:50%;background:#d9e5d3}.mock-body{padding:18px}.login-box{max-width:450px;margin:30px auto;background:white;border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:var(--shadow-soft);text-align:center}.login-box img{width:110px;height:110px;object-fit:contain;margin-bottom:13px}.input{width:100%;border:1px solid var(--line);border-radius:15px;background:#fbfcf8;padding:13px 14px;margin:7px 0 14px}.label{display:block;text-align:left;font-weight:900;font-size:13px;color:var(--green-900)}
+    .dashboard{display:grid;grid-template-columns:minmax(0,1fr) 345px;gap:18px}.toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:15px}.select{border:1px solid var(--line);background:white;border-radius:14px;padding:11px 14px;font-weight:900;color:var(--green-900)}.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.product{background:white;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow-soft)}.pimg{height:122px;background:radial-gradient(circle at 30% 25%,rgba(185,221,85,.32),transparent 42%),linear-gradient(135deg,#e8f4d3,#fff);display:grid;place-items:center;font-size:52px}.pbody{padding:15px}.pbody h4{margin:0 0 5px;color:var(--green-950);font-size:16px}.muted{color:var(--soft);font-size:13px;font-weight:700}.variants{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.variants select,.variants input{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px;background:#fbfcf8;font-size:13px;font-weight:750;color:var(--green-900)}.pprice{display:flex;align-items:baseline;gap:6px;margin-top:8px}.pprice b{font-size:23px;color:var(--green-800);letter-spacing:-.04em}.pprice span{font-size:12px;color:var(--soft)}.side-panel{background:white;border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:var(--shadow-soft);height:max-content;position:sticky;top:20px}.order-row{display:grid;grid-template-columns:1fr auto;gap:9px;border-bottom:1px dashed var(--line);padding:11px 0;font-size:13px}.total{display:flex;justify-content:space-between;align-items:baseline;margin:15px 0 12px;font-weight:1000;font-size:22px;color:var(--green-950)}.total small{font-size:12px;color:var(--soft);font-weight:750}.stepper{display:grid;gap:12px}.step{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start}.num{width:34px;height:34px;border-radius:13px;background:#e8f7d6;color:var(--green-800);display:grid;place-items:center;font-weight:1000}.step h4{margin:0 0 4px;color:var(--green-950)}.step p{margin:0;color:var(--soft);line-height:1.45;font-size:13px}
+    .admin-layout{display:grid;grid-template-columns:270px 1fr;gap:18px}.admin-menu{display:grid;gap:8px;height:max-content}.admin-menu button{border:1px solid var(--line);background:white;color:var(--green-900);border-radius:16px;padding:12px 14px;text-align:left;font-weight:900;cursor:pointer}.admin-menu button.active{background:var(--green-800);color:white}.table-wrap{overflow:auto}.table{width:100%;border-collapse:separate;border-spacing:0 9px;min-width:800px}.table th{font-size:12px;color:var(--soft);text-transform:uppercase;letter-spacing:.08em;text-align:left;padding:0 12px}.table td{background:white;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:13px 12px;font-size:14px}.table td:first-child{border-left:1px solid var(--line);border-radius:15px 0 0 15px;font-weight:900;color:var(--green-950)}.table td:last-child{border-right:1px solid var(--line);border-radius:0 15px 15px 0}.mini-input{width:92px;border:1px solid var(--line);border-radius:12px;padding:9px;background:#fbfcf8;font-weight:850}.wider{width:150px}.review-grid{display:grid;grid-template-columns:1fr 360px;gap:18px}.review-item{display:grid;grid-template-columns:1.2fr .85fr .8fr .8fr auto;gap:10px;align-items:center;background:white;border:1px solid var(--line);border-radius:20px;padding:13px;margin-bottom:10px}.review-item b{color:var(--green-950)}.status{display:inline-flex;align-items:center;gap:6px;font-size:12px;border-radius:999px;padding:7px 10px;font-weight:950;background:#e9f7d8;color:var(--green-800)}.status.wait{background:#fff6dc;color:#805300}.status.off{background:#fff0ee;color:#9e342e}.timeline{position:relative;display:grid;gap:14px}.timeline:before{content:"";position:absolute;left:16px;top:16px;bottom:16px;width:2px;background:#d7e6cd}.titem{position:relative;display:grid;grid-template-columns:34px 1fr;gap:12px}.titem .num{position:relative;z-index:1;background:white;border:2px solid var(--leaf)}.download-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.download-card{background:white;border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow-soft)}.download-card h3{margin:0 0 8px;color:var(--green-950)}.download-card .percent{font-size:38px;font-weight:1000;color:var(--green-800);letter-spacing:-.06em}.excel-box{border:2px dashed #bed4b2;background:#fbfff4;border-radius:22px;padding:22px;text-align:center}.pricing{display:grid;grid-template-columns:1fr .82fr;gap:18px}.pricing-card{background:linear-gradient(135deg,var(--green-950),var(--green-800));color:white;border-radius:30px;padding:32px;box-shadow:var(--shadow);position:relative;overflow:hidden}.pricing-card:after{content:"";position:absolute;width:280px;height:280px;border-radius:50%;right:-120px;bottom:-120px;background:rgba(185,221,85,.18)}.pricing-card h2{font-size:34px;letter-spacing:-.06em;margin:0 0 8px}.pricing-card p{color:#d7e8d2;line-height:1.55;margin:0}.big-price{font-size:70px;font-weight:1000;letter-spacing:-.08em;margin:18px 0 3px}.small-price{font-size:30px;font-weight:1000;color:var(--leaf);letter-spacing:-.04em}.scope{list-style:none;padding:0;margin:0;display:grid;gap:11px}.scope li{display:flex;gap:10px;align-items:flex-start;color:#435248;line-height:1.45}.scope li:before{content:"✓";width:23px;height:23px;border-radius:50%;background:#e9f7d8;color:var(--green-800);display:inline-grid;place-items:center;font-weight:1000;flex:0 0 23px}.note{background:#fff8e5;border:1px solid #ffe3a3;color:#6b4900;border-radius:22px;padding:18px;line-height:1.55}.footer{text-align:center;color:var(--soft);font-size:12px;margin:36px 0 10px}.mobile-tabs{display:none}
+    @media(max-width:1120px){.app{grid-template-columns:1fr}.side{position:relative;height:auto}.nav{grid-template-columns:repeat(3,1fr)}.hero,.dashboard,.admin-layout,.review-grid,.pricing{grid-template-columns:1fr}.side-card{margin-top:0}.product-grid,.grid-4,.download-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:720px){main{padding:16px}.hero-card,.pricing-card{padding:24px}.hero h2{font-size:35px}.hero-stats,.product-grid,.grid-2,.grid-3,.grid-4,.download-grid{grid-template-columns:1fr}.nav{grid-template-columns:1fr}.section-title{align-items:flex-start;flex-direction:column}.review-item{grid-template-columns:1fr}.big-price{font-size:47px}.side{padding:20px 15px}.brand img{width:54px;height:54px}.mock-body{padding:12px}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="side">
+      <div class="brand">
+        <img src="assets/logo-valle-azul-green.png" alt="Logo Valle Azul">
+        <div>
+          <h1>Valle Azul<br>Portal B2B</h1>
+          <span>Maquetación para reunión</span>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Navegación demo">
+        <button class="active" data-screen="inicio">🌿 Visión general</button>
+        <button data-screen="cliente">🧺 Vista cliente</button>
+        <button data-screen="admin">⚙️ Panel admin</button>
+        <button data-screen="revision">⚖️ Revisión pedido</button>
+        <button data-screen="listas">📄 Listas y Excel</button>
+        <button data-screen="gti">🧾 GTI</button>
+        <button data-screen="precio">💵 Inversión</button>
+      </nav>
+      <div class="side-card">
+        <b>Demo visual</b>
+        <small>Esta maquetación muestra el flujo propuesto. El sistema final se ajusta luego de validar datos reales, cuenta GTI y estructura de productos.</small>
+      </div>
+    </aside>
+
+    <main>
+      <div class="topbar">
+        <div class="pill">🍃 Portal B2B · Precios, variantes, IVA, pedidos y GTI</div>
+        <div class="actions">
+          <button class="btn btn-soft" onclick="showScreen('cliente')">Ver portal cliente</button>
+          <button class="btn btn-primary" onclick="showScreen('precio')">Ver inversión</button>
+        </div>
+      </div>
+
+      <section id="inicio" class="screen active">
+        <div class="hero">
+          <div class="hero-card">
+            <div class="hero-brand">
+              <img src="assets/logo-valle-azul-green.png" alt="Logo Valle Azul">
+              <div>
+                <div class="eyebrow">Productos Frescos Valle Azul</div>
+                <div class="pill" style="box-shadow:none;">portal.productosfrescosvalleazul.com</div>
+              </div>
+            </div>
+            <h2>Un portal privado para que cada cliente compre con su precio final.</h2>
+            <p>La propuesta contempla un sistema B2B donde Valle Azul administra productos, variantes, impuestos, clientes y listas comerciales. Cada cliente ingresa con usuario propio, ve únicamente su precio final con IVA incluido y realiza pedidos listos para revisión interna.</p>
+            <div class="actions">
+              <button class="btn btn-primary" onclick="showScreen('cliente')">Simular compra</button>
+              <button class="btn btn-soft" onclick="showScreen('revision')">Ver revisión interna</button>
+            </div>
+            <div class="hero-stats">
+              <div class="stat"><b>10–35%</b><span>condición comercial por cliente</span></div>
+              <div class="stat"><b>1% / 13%</b><span>IVA configurable por producto</span></div>
+              <div class="stat"><b>2 var.</b><span>variantes simples por producto</span></div>
+              <div class="stat"><b>GTI</b><span>flujo hacia factura electrónica</span></div>
+            </div>
+          </div>
+          <div class="quote-card">
+            <h3>Alcance actualizado</h3>
+            <p>Portal B2B completo con panel administrativo, precios automáticos, productos con variantes, revisión de pedidos, listas descargables, carga por Excel y preparación para GTI.</p>
+            <div class="price">USD 4.000</div>
+            <div class="fine">Desarrollo del sistema según alcance conversado.</div>
+            <div class="quote-list">
+              <div class="qrow"><b>✓</b><span>Clientes con porcentajes de ganancia configurables.</span></div>
+              <div class="qrow"><b>✓</b><span>Pedidos con ajuste de pesos y productos antes de facturar.</span></div>
+              <div class="qrow"><b>✓</b><span>Hosting incluido dentro del mantenimiento mensual.</span></div>
+            </div>
+            <button class="btn btn-lime btn-block" onclick="showScreen('precio')">Ver mantenimiento y condiciones</button>
+          </div>
+        </div>
+
+        <div class="section-title">
+          <div>
+            <h2>Qué incluye la solución</h2>
+            <p>El flujo está pensado para reducir carga manual, evitar editar facturas producto por producto y ordenar la venta recurrente.</p>
+          </div>
+        </div>
+        <div class="grid grid-4">
+          <div class="card"><div class="icon">👥</div><h3>Clientes por lista</h3><p>Cada cliente queda asignado a una condición comercial: 10%, 15%, 20%, 25%, 30% o 35%.</p></div>
+          <div class="card"><div class="icon">🥔</div><h3>Variantes</h3><p>Productos con una o dos variantes simples, por ejemplo papa pequeña, mediana o grande.</p></div>
+          <div class="card"><div class="icon">🧮</div><h3>IVA por producto</h3><p>Configuración individual de 1% para canasta básica o 13% para otros productos.</p></div>
+          <div class="card"><div class="icon">🧾</div><h3>GTI</h3><p>Pedido aprobado listo para conexión con factura electrónica, sujeto a validación de cuenta y permisos.</p></div>
+        </div>
+      </section>
+
+      <section id="cliente" class="screen">
+        <div class="section-title">
+          <div>
+            <h2>Vista del cliente</h2>
+            <p>El cliente nunca ve el margen ni el porcentaje aplicado. Solo ve el precio final con IVA incluido.</p>
+          </div>
+          <select id="clientSelect" class="select" onchange="renderProducts()">
+            <option value="10">Cliente nuevo · Lista +10%</option>
+            <option value="15" selected>Restaurante La Huerta · Lista +15%</option>
+            <option value="20">Soda Central · Lista +20%</option>
+            <option value="25">Mini Súper Verde · Lista +25%</option>
+            <option value="30">Distribuidor Norte · Lista +30%</option>
+            <option value="35">Cliente especial · Lista +35%</option>
+          </select>
+        </div>
+        <div class="mock-frame">
+          <div class="mock-window">
+            <div class="mock-header">
+              <strong>portal.productosfrescosvalleazul.com</strong>
+              <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            </div>
+            <div class="mock-body">
+              <div class="dashboard">
+                <div>
+                  <div class="card" style="margin-bottom:15px;">
+                    <div class="toolbar" style="margin-bottom:0;">
+                      <div>
+                        <h3 id="clientName">Hola, Restaurante La Huerta</h3>
+                        <p id="clientNote">Lista comercial asignada. Los precios mostrados ya incluyen IVA.</p>
+                      </div>
+                      <span class="tag">🔒 Precios privados</span>
+                    </div>
+                  </div>
+                  <div class="toolbar">
+                    <div class="pill">🥬 Catálogo del día</div>
+                    <div class="actions">
+                      <button class="btn btn-soft">Frutas</button>
+                      <button class="btn btn-soft">Verduras</button>
+                      <button class="btn btn-soft">Temporada</button>
+                    </div>
+                  </div>
+                  <div id="products" class="product-grid"></div>
+                </div>
+                <aside class="side-panel">
+                  <h3>Pedido actual</h3>
+                  <p>Resumen estimado antes de revisión interna.</p>
+                  <div id="cartRows" style="margin-top:12px;"></div>
+                  <div class="total"><span>Total <small>estimado</small></span><span id="cartTotal">₡0</span></div>
+                  <textarea class="input" rows="3">Entregar mañana antes de las 10:00 a.m. Sustituir por producto similar si falta stock.</textarea>
+                  <button class="btn btn-primary btn-block" onclick="showScreen('revision')">Enviar pedido a revisión</button>
+                  <p style="font-size:12px;color:var(--soft);line-height:1.45;margin:12px 0 0;">Luego Valle Azul revisa pesos finales, disponibilidad y confirma el total.</p>
+                </aside>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="admin" class="screen">
+        <div class="section-title">
+          <div>
+            <h2>Panel administrador</h2>
+            <p>Valle Azul puede actualizar productos, variantes, IVA, precios base y condiciones por cliente.</p>
+          </div>
+        </div>
+        <div class="grid grid-4" style="margin-bottom:16px;">
+          <div class="card"><h3>126</h3><p>Productos y variantes</p></div>
+          <div class="card"><h3>6</h3><p>Listas comerciales</p></div>
+          <div class="card"><h3>42</h3><p>Clientes activos</p></div>
+          <div class="card"><h3>11</h3><p>Pedidos por revisar</p></div>
+        </div>
+        <div class="admin-layout">
+          <div class="admin-menu">
+            <button class="active">Productos</button>
+            <button>Clientes</button>
+            <button>Listas de precio</button>
+            <button>IVA</button>
+            <button>Pedidos</button>
+            <button>Configuración GTI</button>
+          </div>
+          <div class="card">
+            <div class="toolbar">
+              <div>
+                <h3>Productos, variantes e impuestos</h3>
+                <p>Ejemplo de administración interna. Los precios finales se calculan solos por cliente.</p>
+              </div>
+              <div class="actions">
+                <button class="btn btn-soft" onclick="showScreen('listas')">Importar Excel</button>
+                <button class="btn btn-primary">Nuevo producto</button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table class="table">
+                <thead><tr><th>Producto</th><th>Variante 1</th><th>Variante 2</th><th>Precio base</th><th>IVA</th><th>Disponibilidad</th><th>Factura</th></tr></thead>
+                <tbody>
+                  <tr><td>Papa</td><td><input class="mini-input wider" value="Mediana"></td><td><input class="mini-input wider" value="Saco 25 kg"></td><td><input class="mini-input" value="₡900"></td><td><select class="mini-input"><option>1%</option><option>13%</option></select></td><td><span class="status">Disponible</span></td><td>Papa mediana saco</td></tr>
+                  <tr><td>Tomate</td><td><input class="mini-input wider" value="Primera"></td><td><input class="mini-input wider" value="Kg"></td><td><input class="mini-input" value="₡1.120"></td><td><select class="mini-input"><option>1%</option><option>13%</option></select></td><td><span class="status">Disponible</span></td><td>Tomate primera</td></tr>
+                  <tr><td>Fresa</td><td><input class="mini-input wider" value="Bandeja"></td><td><input class="mini-input wider" value="500 g"></td><td><input class="mini-input" value="₡2.850"></td><td><select class="mini-input"><option>13%</option><option>1%</option></select></td><td><span class="status wait">Pocas unidades</span></td><td>Fresa bandeja 500g</td></tr>
+                  <tr><td>Cebolla</td><td><input class="mini-input wider" value="Morada"></td><td><input class="mini-input wider" value="Kg"></td><td><input class="mini-input" value="₡760"></td><td><select class="mini-input"><option>1%</option><option>13%</option></select></td><td><span class="status">Disponible</span></td><td>Cebolla morada</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="note" style="margin-top:12px;">El administrador puede manejar precio base y el sistema calcula automáticamente el precio final según porcentaje + IVA, sin mostrar margen al cliente.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="revision" class="screen">
+        <div class="section-title">
+          <div>
+            <h2>Revisión de pedido antes de facturar</h2>
+            <p>Etapa intermedia para ajustar pesos reales, quitar productos que no llegaron y aprobar la salida hacia GTI.</p>
+          </div>
+          <span class="tag amber">⏳ Pedido pendiente</span>
+        </div>
+        <div class="review-grid">
+          <div class="card">
+            <div class="toolbar">
+              <div>
+                <h3>Pedido #VA-1048 · Restaurante La Huerta</h3>
+                <p>Cliente lista +15% · Precios finales con IVA incluido.</p>
+              </div>
+              <div class="actions"><button class="btn btn-soft">Guardar borrador</button><button class="btn btn-primary" onclick="showScreen('gti')">Aprobar y pasar a GTI</button></div>
+            </div>
+            <div class="review-item"><b>Papa mediana · Saco</b><span>Pedido: 25 kg</span><label>Peso final <input class="mini-input" value="24.3 kg"></label><label>Total <input class="mini-input" value="₡25.402"></label><button class="btn btn-soft">OK</button></div>
+            <div class="review-item"><b>Tomate primera · Kg</b><span>Pedido: 12 kg</span><label>Peso final <input class="mini-input" value="11.8 kg"></label><label>Total <input class="mini-input" value="₡15.367"></label><button class="btn btn-soft">OK</button></div>
+            <div class="review-item"><b>Fresa bandeja · 500 g</b><span>Pedido: 8 unidades</span><label>Final <input class="mini-input" value="6 un."></label><label>Total <input class="mini-input" value="₡22.254"></label><button class="btn btn-danger">Quitar</button></div>
+            <div class="review-item"><b>Cebolla morada · Kg</b><span>Pedido: 10 kg</span><label>Peso final <input class="mini-input" value="10 kg"></label><label>Total <input class="mini-input" value="₡8.827"></label><button class="btn btn-soft">OK</button></div>
+          </div>
+          <aside class="side-panel">
+            <h3>Control interno</h3>
+            <p>El pedido no se factura hasta pasar por revisión.</p>
+            <div class="stepper" style="margin-top:16px;">
+              <div class="step"><div class="num">1</div><div><h4>Pedido recibido</h4><p>El cliente lo envía desde su portal.</p></div></div>
+              <div class="step"><div class="num">2</div><div><h4>Revisión de bodega</h4><p>Se ajustan pesos finales y disponibilidad.</p></div></div>
+              <div class="step"><div class="num">3</div><div><h4>Aprobación</h4><p>Se confirma total final antes de facturar.</p></div></div>
+              <div class="step"><div class="num">4</div><div><h4>GTI</h4><p>Se prepara la emisión electrónica.</p></div></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="listas" class="screen">
+        <div class="section-title">
+          <div>
+            <h2>Listas de precio y carga masiva</h2>
+            <p>Desde la misma base de productos se generan listas por porcentaje para enviar a clientes nuevos.</p>
+          </div>
+        </div>
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="toolbar">
+              <div>
+                <h3>Descarga rápida de listas</h3>
+                <p>El sistema toma el precio base, suma porcentaje e IVA y genera el archivo final.</p>
+              </div>
+            </div>
+            <div class="download-grid">
+              <div class="download-card"><span class="tag">Lista</span><div class="percent">+10%</div><p>Clientes nuevos o cuenta especial.</p><button class="btn btn-soft btn-block">Descargar PDF/Excel</button></div>
+              <div class="download-card"><span class="tag">Lista</span><div class="percent">+15%</div><p>Restaurantes frecuentes.</p><button class="btn btn-soft btn-block">Descargar PDF/Excel</button></div>
+              <div class="download-card"><span class="tag">Lista</span><div class="percent">+20%</div><p>Sodas y comercios medianos.</p><button class="btn btn-soft btn-block">Descargar PDF/Excel</button></div>
+              <div class="download-card"><span class="tag">Lista</span><div class="percent">+25%</div><p>Mini súper / tiendas.</p><button class="btn btn-soft btn-block">Descargar PDF/Excel</button></div>
+              <div class="download-card"><span class="tag">Lista</span><div class="percent">+30%</div><p>Canal comercial.</p><button class="btn btn-soft btn-block">Descargar PDF/Excel</button></div>
+              <div class="download-card"><span class="tag">Lista</span><div class="percent">+35%</div><p>Condición especial.</p><button class="btn btn-soft btn-block">Descargar PDF/Excel</button></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Carga masiva por Excel</h3>
+            <p>Para evitar cargar producto por producto, se propone una importación guiada con columnas base.</p>
+            <div class="excel-box" style="margin:18px 0;">
+              <div style="font-size:44px;margin-bottom:8px;">📥</div>
+              <b>Arrastrar archivo de productos</b>
+              <p style="margin-top:8px;">Columnas sugeridas: producto, variante 1, variante 2, precio base, IVA, unidad, disponibilidad.</p>
+              <button class="btn btn-primary">Simular importación</button>
+            </div>
+            <div class="table-wrap">
+              <table class="table" style="min-width:560px;">
+                <thead><tr><th>Campo</th><th>Ejemplo</th><th>Obligatorio</th></tr></thead>
+                <tbody>
+                  <tr><td>Producto</td><td>Papa</td><td>Sí</td></tr>
+                  <tr><td>Variante 1</td><td>Mediana</td><td>Opcional</td></tr>
+                  <tr><td>Variante 2</td><td>Saco 25 kg</td><td>Opcional</td></tr>
+                  <tr><td>IVA</td><td>1% / 13%</td><td>Sí</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="gti" class="screen">
+        <div class="section-title">
+          <div>
+            <h2>Flujo propuesto con GTI Facturación Electrónica</h2>
+            <p>El objetivo es no volver a digitar producto por producto. El pedido aprobado prepara la información para emisión electrónica.</p>
+          </div>
+          <span class="tag blue">Sujeto a validación de cuenta GTI</span>
+        </div>
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>De pedido a comprobante</h3>
+            <div class="timeline" style="margin-top:18px;">
+              <div class="titem"><div class="num">1</div><div><h3>Pedido aprobado</h3><p>Se confirma peso final, precio final, IVA y disponibilidad.</p></div></div>
+              <div class="titem"><div class="num">2</div><div><h3>Datos listos para GTI</h3><p>Cliente, productos, cantidades, precios, impuestos y total quedan preparados.</p></div></div>
+              <div class="titem"><div class="num">3</div><div><h3>Validación fiscal</h3><p>Se revisa tipo de comprobante, identificación, correo y datos obligatorios.</p></div></div>
+              <div class="titem"><div class="num">4</div><div><h3>Emisión electrónica</h3><p>El comprobante se envía hacia Hacienda y al receptor, según configuración de GTI.</p></div></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Qué se necesita validar</h3>
+            <ul class="scope" style="margin-top:14px;">
+              <li>Acceso a la cuenta de GTI y permisos de integración.</li>
+              <li>Plan activo y posibilidad de conexión desde sistema externo.</li>
+              <li>Tipo de comprobante que utilizan: factura, tiquete u otro.</li>
+              <li>Datos obligatorios de clientes y productos para Hacienda.</li>
+              <li>Si la emisión será automática o con aprobación previa.</li>
+            </ul>
+            <div class="note" style="margin-top:16px;">La maquetación muestra el flujo ideal. La implementación final depende de credenciales, permisos y pruebas reales con la cuenta GTI de Valle Azul.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="precio" class="screen">
+        <div class="section-title">
+          <div>
+            <h2>Inversión y mantenimiento</h2>
+            <p>Propuesta ordenada para presentar el alcance actualizado sin mezclar costos de dominio con el desarrollo.</p>
+          </div>
+        </div>
+        <div class="pricing">
+          <div class="pricing-card">
+            <img src="assets/logo-valle-azul-white.png" alt="Logo Valle Azul blanco" style="width:130px;height:auto;margin-bottom:18px;position:relative;z-index:1;">
+            <h2>Portal B2B completo</h2>
+            <p>Incluye panel administrador, clientes, listas, productos, variantes, IVA, revisión de pedidos, descarga de listas, carga masiva y flujo GTI.</p>
+            <div class="big-price">USD 4.000</div>
+            <p style="position:relative;z-index:1;">Desarrollo completo según alcance conversado.</p>
+            <div style="height:18px;"></div>
+            <div class="small-price">USD 300/mes</div>
+            <p style="position:relative;z-index:1;">Mantenimiento mensual con hosting incluido, monitoreo básico y soporte operativo.</p>
+          </div>
+          <div class="grid" style="gap:16px;">
+            <div class="card">
+              <h3>Incluido en el desarrollo</h3>
+              <ul class="scope" style="margin-top:14px;">
+                <li>Portal privado para clientes.</li>
+                <li>Panel administrador para productos, clientes y pedidos.</li>
+                <li>Porcentajes comerciales 10%, 15%, 20%, 25%, 30% y 35%.</li>
+                <li>IVA individual por producto: 1% o 13%.</li>
+                <li>Productos con hasta dos variantes simples.</li>
+                <li>Revisión de pedido antes de facturar.</li>
+                <li>Descarga de listas de precios por porcentaje.</li>
+                <li>Carga masiva de productos mediante archivo tipo Excel.</li>
+                <li>Flujo de integración con GTI sujeto a validación de acceso.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Dominio, link y hosting</h3>
+              <p>El sistema puede publicarse en un subdominio del dominio actual, por ejemplo:</p>
+              <div class="pill" style="margin:13px 0;box-shadow:none;">portal.productosfrescosvalleazul.com</div>
+              <p>Si prefieren comprar un dominio nuevo, se abona aparte de forma anual según disponibilidad y proveedor. El hosting queda cubierto dentro del mantenimiento mensual de USD 300.</p>
+            </div>
+            <div class="card">
+              <h3>Beneficio por recomendación</h3>
+              <p>Si Valle Azul nos recomienda con otra empresa y ese cliente cierra un proyecto, se otorgan <b>3 meses de gracia</b> sobre el mantenimiento mensual.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">Maquetación visual para reunión comercial · Valle Azul · Portal B2B</div>
+    </main>
+  </div>
+
+  <script>
+    const products = [
+      {name:'Papa', emoji:'🥔', unit:'Saco / kg', base:900, iva:1, v1:['Pequeña','Mediana','Grande'], v2:['Kg','Saco 25 kg']},
+      {name:'Tomate', emoji:'🍅', unit:'Kg', base:1120, iva:1, v1:['Segunda','Primera'], v2:['Kg','Caja']},
+      {name:'Fresa', emoji:'🍓', unit:'Bandeja', base:2850, iva:13, v1:['Bandeja'], v2:['250 g','500 g']},
+      {name:'Cebolla', emoji:'🧅', unit:'Kg', base:760, iva:1, v1:['Blanca','Morada'], v2:['Kg','Malla']},
+      {name:'Lechuga', emoji:'🥬', unit:'Unidad', base:520, iva:1, v1:['Americana','Criolla'], v2:['Unidad','Caja']},
+      {name:'Piña', emoji:'🍍', unit:'Unidad', base:980, iva:13, v1:['Pequeña','Grande'], v2:['Unidad','Caja']}
+    ];
+    const clientNames = {
+      10:'Cliente nuevo',
+      15:'Restaurante La Huerta',
+      20:'Soda Central',
+      25:'Mini Súper Verde',
+      30:'Distribuidor Norte',
+      35:'Cliente especial'
+    };
+    const chosen = [
+      {i:0, qty:24.3},
+      {i:1, qty:11.8},
+      {i:2, qty:6},
+      {i:3, qty:10}
+    ];
+    function formatCRC(n){return '₡' + Math.round(n).toLocaleString('es-CR');}
+    function calc(base, margin, iva){return base * (1 + margin/100) * (1 + iva/100);}
+    function showScreen(id){
+      document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active', b.dataset.screen === id));
+      window.scrollTo({top:0,behavior:'smooth'});
+      if(id==='cliente') renderProducts();
+    }
+    document.querySelectorAll('.nav button').forEach(btn=>btn.addEventListener('click',()=>showScreen(btn.dataset.screen)));
+    function renderProducts(){
+      const margin = Number(document.getElementById('clientSelect')?.value || 15);
+      const clientName = clientNames[margin] || 'Cliente';
+      const cn = document.getElementById('clientName');
+      const note = document.getElementById('clientNote');
+      if(cn) cn.textContent = 'Hola, ' + clientName;
+      if(note) note.textContent = 'Lista comercial asignada. Los precios mostrados ya incluyen IVA. Margen interno no visible.';
+      const wrap = document.getElementById('products');
+      if(!wrap) return;
+      wrap.innerHTML = products.map((p, idx)=>{
+        const price = calc(p.base, margin, p.iva);
+        return `<div class="product">
+          <div class="pimg">${p.emoji}</div>
+          <div class="pbody">
+            <h4>${p.name}</h4>
+            <div class="muted">${p.unit} · IVA ${p.iva}% incluido</div>
+            <div class="variants">
+              <select>${p.v1.map(v=>`<option>${v}</option>`).join('')}</select>
+              <select>${p.v2.map(v=>`<option>${v}</option>`).join('')}</select>
+            </div>
+            <div class="pprice"><b>${formatCRC(price)}</b><span>precio final</span></div>
+            <button class="btn btn-soft btn-block" style="margin-top:12px;" onclick="showScreen('revision')">Agregar al pedido</button>
+          </div>
+        </div>`;
+      }).join('');
+      const rows = document.getElementById('cartRows');
+      if(rows){
+        let total = 0;
+        rows.innerHTML = chosen.map(item=>{
+          const p = products[item.i];
+          const line = calc(p.base, margin, p.iva) * item.qty;
+          total += line;
+          return `<div class="order-row"><span>${p.emoji} ${p.name}<br><small class="muted">${item.qty} ${p.unit}</small></span><b>${formatCRC(line)}</b></div>`;
+        }).join('');
+        document.getElementById('cartTotal').textContent = formatCRC(total);
+      }
+    }
+    renderProducts();
+  </script>
+</body>
+</html>
